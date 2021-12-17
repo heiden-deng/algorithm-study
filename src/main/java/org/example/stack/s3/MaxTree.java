@@ -6,6 +6,8 @@ package org.example.stack.s3;
  * @Project: qrcode-utils
  */
 
+import org.example.stack.entity.TreeNode;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Stack;
@@ -14,20 +16,11 @@ import java.util.Stack;
  * 根据数组生成二叉树，要求，父节点值比子节点值大
  */
 
-class Node{
-    public int value;
-    public Node left;
-    public Node right;
-
-    public Node(int value) {
-        this.value = value;
-    }
-}
 public class MaxTree {
 
 
-    public void popStackSetMap(Stack<Node> stack, HashMap<Node, Node> map){
-        Node popNode = stack.pop();
+    public void popStackSetMap(Stack<TreeNode> stack, HashMap<TreeNode, TreeNode> map){
+        TreeNode popNode = stack.pop();
         if (stack.isEmpty()){
             map.put(popNode, null);
         }else{
@@ -35,18 +28,18 @@ public class MaxTree {
         }
     }
 
-    public Node createMaxTree(int[] ary){
-        Node[] nodeAry = new Node[ary.length];
+    public TreeNode createMaxTree(int[] ary){
+        TreeNode[] nodeAry = new TreeNode[ary.length];
         for (int i = 0; i < ary.length; i++){
-            nodeAry[i] = new Node(ary[i]);
+            nodeAry[i] = new TreeNode(ary[i]);
 
         }
-        Stack<Node> stack = new Stack<>();
-        HashMap<Node, Node> lBigMax= new HashMap<Node, Node>();
-        HashMap<Node, Node> rBigMax= new HashMap<Node, Node>();
+        Stack<TreeNode> stack = new Stack<>();
+        HashMap<TreeNode, TreeNode> lBigMax= new HashMap<TreeNode, TreeNode>();
+        HashMap<TreeNode, TreeNode> rBigMax= new HashMap<TreeNode, TreeNode>();
 
         for (int i = 0; i < nodeAry.length; i++){
-            Node curNode = nodeAry[i];
+            TreeNode curNode = nodeAry[i];
             while (!stack.isEmpty() && curNode.value > stack.peek().value){
                 popStackSetMap(stack, lBigMax);
             }
@@ -57,7 +50,7 @@ public class MaxTree {
         }
 
         for (int i = nodeAry.length - 1; i >= 0; i--){
-            Node curNode = nodeAry[i];
+            TreeNode curNode = nodeAry[i];
             while (!stack.isEmpty() && curNode.value > stack.peek().value){
                 popStackSetMap(stack, rBigMax);
             }
@@ -66,11 +59,11 @@ public class MaxTree {
         while (!stack.isEmpty()){
             popStackSetMap(stack, rBigMax);
         }
-        Node header = null;
+        TreeNode header = null;
         for (int i = 0; i < nodeAry.length; i++){
-            Node curNode = nodeAry[i];
-            Node left = lBigMax.get(curNode);
-            Node right = rBigMax.get(curNode);
+            TreeNode curNode = nodeAry[i];
+            TreeNode left = lBigMax.get(curNode);
+            TreeNode right = rBigMax.get(curNode);
 
             if (left == null && right == null){
                 header = curNode;
@@ -87,7 +80,7 @@ public class MaxTree {
                     left.right = curNode;
                 }
             }else{
-                Node parentNode = left.value > right.value ? right:left;
+                TreeNode parentNode = left.value > right.value ? right:left;
                 if (parentNode.left == null){
                     parentNode.left = curNode;
                 }else{
@@ -99,7 +92,7 @@ public class MaxTree {
     }
     public static void main(String[] args){
         MaxTree maxTree = new MaxTree();
-        Node header = maxTree.createMaxTree(new int[]{3,4,5,1,2});
+        TreeNode header = maxTree.createMaxTree(new int[]{3,4,5,1,2});
         System.out.println("hello");
     }
 }

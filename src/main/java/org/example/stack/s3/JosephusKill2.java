@@ -1,5 +1,7 @@
 package org.example.stack.s3;
 
+import org.example.stack.entity.Node;
+
 /**
  * @Author: heiden
  * @Date: 2021/12/16 17:08
@@ -45,13 +47,6 @@ package org.example.stack.s3;
 
 
 public class JosephusKill2 {
-    class Node{
-        private int value;
-        private Node next;
-        public Node(int i){
-            this.value = i;
-        }
-    }
 
     public Node josephuskill2(Node head ,int m){
         if (head == null || head.next == head || m < 1){
