@@ -173,7 +173,7 @@ public class VisitTreeDemo{
 	       System.out.println(h.value);	
 	   }
 	   printLeafNotInEdgeMap(h.left, l + 1, edgeMap);
-	   printLeafNotInEdgeMap(h.right, l ＋1, edgeMap);
+	   printLeafNotInEdgeMap(h.right, l+1, edgeMap);
 	}
 	
 	/**
@@ -194,7 +194,7 @@ public class VisitTreeDemo{
 	    printLeafNotInEdgeMap(h,0, edgeMap);//从左到右打印叶子节点
 	    for(int i = height -1; i >=0; i--){
 	      if(edgeMap[i][0] != edgeMap[i][1]){
-	          System.out.println(" " + edgeMap[i][1].value) //从下往上打印有边界节点值
+	          System.out.println(" " + edgeMap[i][1].value); //从下往上打印有边界节点值
 	      }	
 	    }
 	}
